@@ -1,0 +1,10 @@
+{
+  "name": "veterantech-api-sentinel",
+  "version": "1.0.0",
+  "description": "Zero-dependency Node.js CLI tool for real-time API health checking, latency monitoring, SLA metrics, and in-memory CRUD registry.",
+  "type": "module",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  }
+}
