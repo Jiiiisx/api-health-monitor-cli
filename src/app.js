@@ -114,7 +114,8 @@ const printMenu = () => {
   console.log(`    ${C.brightCyan}[7]${C.reset} ${C.white}Update Endpoint Config${C.reset}      ${C.dim}-- Ubah URL, label, atau expected status${C.reset}`);
   console.log(`    ${C.brightCyan}[8]${C.reset} ${C.white}Delete Target Endpoint${C.reset}     ${C.dim}-- Hapus endpoint dari in-memory array${C.reset}`);
 
-  console.log(`\n  ${C.brightRed}[0] Exit Application${C.reset}`);
+  console.log(`\n  ${C.brightYellow}${C.bold}[+] SYSTEM${C.reset}`);
+  console.log(`    ${C.brightRed}[9]${C.reset} ${C.white}Exit Application${C.reset}           ${C.dim}(atau ketik 'q' / 'exit')${C.reset}`);
   console.log(`${C.gray}  ----------------------------------------------------------------------------${C.reset}`);
 };
 
@@ -324,9 +325,11 @@ const main = async () => {
     printBanner();
     printMenu();
 
-    const choice = await rl.question(`\n  ${C.brightCyan}${C.bold}Command [0-8]: ${C.reset}`);
+    const choice = await rl.question(`\n  ${C.brightCyan}${C.bold}Command [1-9 / q]: ${C.reset}`);
 
-    switch (choice.trim()) {
+    const normalizedChoice = choice.trim().toLowerCase();
+
+    switch (normalizedChoice) {
       case "1":
         await handlePingAll();
         break;
@@ -367,13 +370,16 @@ const main = async () => {
         await handleDelete();
         break;
 
+      case "9":
       case "0":
-        console.log(`\n  ${C.brightCyan}Menutup Veteran Tech API Monitor. Selesai.${C.reset}\n`);
+      case "q":
+      case "exit":
+        console.log(`\n  ${C.brightCyan}[*] Menutup Sentinel API Monitor. Terima kasih & sampai jumpa!${C.reset}\n`);
         isRunning = false;
         break;
 
       default:
-        console.log(`\n  ${C.red}[Error] Pilihan '${choice}' tidak valid. Masukkan angka 0 s.d 8.${C.reset}`);
+        console.log(`\n  ${C.red}[Error] Pilihan '${choice}' tidak valid. Masukkan angka 1 s.d 9 (atau 'q' untuk keluar).${C.reset}`);
         break;
     }
 

@@ -28,7 +28,7 @@ export const createEndpoint = ({ name, url, method, expectedStatus }) => {
     lastChecked: null
   };
 
-  // B.2: Spread Operator untuk menyalin data tanpa mutasi langsung
+  // Spread Operator untuk menyalin data tanpa mutasi langsung
   const updatedEndpoints = [...endpoints, newEndpoint];
   setEndpoints(updatedEndpoints);
 
@@ -71,7 +71,7 @@ export const deleteEndpointById = (id) => {
   return target;
 };
 
-// 5. LIVE TESTING: Real HTTP Ping via native fetch() (Async/Await + Update in-memory)
+//Real HTTP Ping via native fetch() (Async/Await + Update in-memory)
 export const pingSingleEndpoint = async (id) => {
   const target = endpoints.find((item) => item.id === id);
   if (!target) return null;
@@ -130,7 +130,7 @@ export const pingAllEndpoints = async () => {
   return results;
 };
 
-// 6. BONUS METRIC: Analisis Health & SLA System (B.1: .reduce() & .some())
+// Analisis Health & SLA System (B.1: .reduce() & .some())
 export const calculateSystemHealth = () => {
   if (endpoints.length === 0) {
     return {
@@ -144,7 +144,7 @@ export const calculateSystemHealth = () => {
     };
   }
 
-  // B.1: .reduce() untuk agregasi metrik
+  // .reduce() untuk agregasi metrik
   const metrics = endpoints.reduce(
     (acc, { health, lastLatencyMs }) => {
       const isChecked = health !== "UNCHECKED";
@@ -167,7 +167,7 @@ export const calculateSystemHealth = () => {
     ? ((metrics.healthyCount / metrics.checkedCount) * 100).toFixed(2)
     : "0.00";
 
-  // B.1: .some() untuk mendeteksi apakah ada API yang mengalami kegagalan/down
+  // .some() untuk mendeteksi apakah ada API yang mengalami kegagalan/down
   const hasCriticalFailure = endpoints.some(({ health }) => health === "DOWN" || health === "ERROR");
 
   return {

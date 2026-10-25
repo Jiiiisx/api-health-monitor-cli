@@ -1,5 +1,3 @@
-// src/data.js
-
 export let endpoints = [
   {
     id: "EP-101",
